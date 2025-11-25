@@ -46,7 +46,18 @@ export default function App() {
         caramels: state.caramels - Math.round(state.damagePerShotPrice),
     };
   }
-  else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= state.multiplierPrice) {
+  else if (action.type === "BUY_DAMAGE_UPGRADE1" && state.caramels >= 15) {
+    newState = {
+      ...state,
+
+    }; 
+  }
+  else if (action.type === "BUY_DAMAGE_UPGRADE2" && state.caramels >= 30) {
+    newState = {
+      ...state,
+    }; 
+  }
+  else if (action.type === "BUY_DAMAGE_UPGRADE3" && state.caramels >= 50) {
     newState = {
       ...state,
     }; 
@@ -101,17 +112,17 @@ export default function App() {
         <p className='col-md-2 col-12'>{state.damagePerShotPrice} PRECIO MULTIPLICADOR  </p>
         
 
-        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER1" })}>
           <img className='img-fluid' src={laserImg} style={{ width: "100px", height: "100px" }} />
           Precio: 15 Caramelos  
         </button>
 
-        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER2" })}>
           <img className='img-fluid' src={cohetesImg} style={{ width: "100px", height: "100px" }} />
           Precio: 30 Caramelos
         </button>
 
-        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER3" })}>
           <img className='img-fluid' src={torreImg} style={{ width: "100px", height: "100px" }} />
           Precio: 50 Caramelos
         </button>
