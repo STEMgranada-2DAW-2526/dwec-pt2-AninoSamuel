@@ -33,10 +33,10 @@ export default function App() {
     };
   } 
 
-  else if (action.type === "AUTO_SHOOT" && state.caramels >= state.multiplierPrice) {
+  else if (action.type === "AUTO_SHOOT" ) {
     newState = {
       ...state,
-      autoShotsPerSecond: state.damageDealt + state.autoShotsPerSecond ,
+      damageDealt: state.damageDealt + state.autoShotsPerSecond ,
     };
   }
   else if (action.type === "BUY_MULTIPLIER" && state.caramels >= state.damagePerShotPrice) {
@@ -87,10 +87,18 @@ export default function App() {
           <img className='img-fluid' src={multiplicadorImg} style={{ width: "100px", height: "100px" }} />
           x  {state.clickMultiplier}
         </button>
-        <p className='col-md-2 col-12'>{state.waveNumber} 🍪</p>
-        <p className='col-md-2 col-12'>{state.waveGoal} 🍪</p>
-        <p className='col-md-2 col-12'>{state.damageDealt} 🍪</p>
-        <p className='col-md-2 col-12'>{state.damagePerShot} 🍪</p>
+
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "NEXT_WAVE" })}>
+          🚚
+          x  {state.clickMultiplier}
+        </button>
+        <p className='col-md-2 col-12'>{state.waveNumber} NUMERO DE OLEADA🍪</p>
+        <p className='col-md-2 col-12'>{state.waveGoal} MARCADOR OLEADA🍪</p>
+        <p className='col-md-2 col-12'>{state.damageDealt}/{state.waveGoal} DAÑO TOTAL HECHO🍪</p>
+        <p className='col-md-2 col-12'>{state.damagePerShot} DAÑO POR CLICK🍪</p>
+        <p className='col-md-2 col-12'>{state.autoShotsPerSecond} DAÑO POR SEGUNDO 🍪</p>
+        <p className='col-md-2 col-12'>{state.damagePerShotPrice} PRECIO MULTIPLICADOR  🍪</p>
+        
       </div>
     </>
   )
