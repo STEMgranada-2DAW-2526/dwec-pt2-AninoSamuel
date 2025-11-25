@@ -44,6 +44,7 @@ export default function App() {
       ...state,
         damagePerShot: state.damagePerShot + 1 ,
         damagePerShotPrice: state.damagePerShotPrice * 1.2,
+        caramels: state.caramels - state.damagePerShotPrice,
     };
   }
   else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= state.multiplierPrice) {
@@ -59,18 +60,20 @@ export default function App() {
       damageDealt: state.damageDealt = 0,
     };
   }
+  return newState;
 }
 
 
   const [state, dispatch] = useReducer(cookieReducer, initialState);
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //       dispatch({ type: "AUTO_SHOOT" });
-  //   }, 1000);
+  useEffect(() => {
+    const timer = setInterval(() => {
+        dispatch({ type: "AUTO_SHOOT" });
+    }, 1000);
 
-  //   return () => clearInterval(timer);
-  // }, []);
+    return () => clearInterval(timer);
+  }, []);
+
  return (
     <>
       <div className='row justify-content-center'>
@@ -79,9 +82,15 @@ export default function App() {
         <button className='col-5' onClick={() => dispatch({ type: "CLICK_SHOOT" })}>
           <img className='img-fluid' src={turronImg} style={{ width: "100px", height: "100px" }} />
         </button>
+
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
+          <img className='img-fluid' src={multiplicadorImg} style={{ width: "100px", height: "100px" }} />
+          x  {state.clickMultiplier}
+        </button>
         <p className='col-md-2 col-12'>{state.waveNumber} 🍪</p>
         <p className='col-md-2 col-12'>{state.waveGoal} 🍪</p>
         <p className='col-md-2 col-12'>{state.damageDealt} 🍪</p>
+        <p className='col-md-2 col-12'>{state.damagePerShot} 🍪</p>
       </div>
     </>
   )
