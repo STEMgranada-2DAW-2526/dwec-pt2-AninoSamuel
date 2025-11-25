@@ -1,5 +1,10 @@
+import { useContext } from "react";
+import { CookieContext, CookieProvider } from "./cookieContext";
+
 export default function Game() {
   const { state, dispatch } = useContext(CookieContext);
+
+  console.log(state)
 
   return (
     <>
