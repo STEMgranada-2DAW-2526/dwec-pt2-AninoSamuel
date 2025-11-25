@@ -1,12 +1,10 @@
 import { createContext, useReducer, useEffect } from "react";
 import { cookieReducer, initialState } from "./cookieReducer";
 
-
 export const CookieContext = createContext();
 
 export function CookieProvider({ children }) {
   const [state, dispatch] = useReducer(cookieReducer, initialState);
-
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -17,9 +15,8 @@ export function CookieProvider({ children }) {
   }, []);
 
   return (
-    <GameProvider.Provider value={{ state, dispatch }}>
+    <CookieContext.Provider value={{ state, dispatch }}>
       {children}
-    </GameProvider.Provider>
+    </CookieContext.Provider>
   );
-
 }
