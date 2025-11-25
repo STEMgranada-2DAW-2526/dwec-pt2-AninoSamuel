@@ -54,10 +54,10 @@ export default function App() {
   else if (action.type === "NEXT_WAVE" && state.damageDealt >= state.waveGoal) {
     newState = {
       ...state,
-      waveGoal: state.waveGoal * 1.1,
+      waveGoal: Math.round(state.waveGoal * 1.1),
       waveNumber: state.waveNumber + 1,
       caramels: state.caramels + 10,
-      damageDealt: state.damageDealt = 0,
+      damageDealt: 0,
     };
   }
   return newState;
@@ -77,7 +77,10 @@ export default function App() {
  return (
     <>
       <div className='row justify-content-center'>
-        <p className='col-md-2 col-12'>{state.caramels} 🍪</p>
+        <p className='col-md-2 col-12'>Tienes {state.caramels} caramelos 
+          <br />
+           <img className='img-fluid' src={carameloImg} style={{ width: "100px", height: "100px" }} />
+        </p>
 
         <button className='col-5' onClick={() => dispatch({ type: "CLICK_SHOOT" })}>
           <img className='img-fluid' src={turronImg} style={{ width: "100px", height: "100px" }} />
@@ -97,6 +100,22 @@ export default function App() {
         <p className='col-md-2 col-12'>{state.autoShotsPerSecond} DAÑO POR SEGUNDO 🍪</p>
         <p className='col-md-2 col-12'>{state.damagePerShotPrice} PRECIO MULTIPLICADOR  🍪</p>
         
+
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
+          <img className='img-fluid' src={laserImg} style={{ width: "100px", height: "100px" }} />
+          Precio: 15 Caramelos  
+        </button>
+
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
+          <img className='img-fluid' src={cohetesImg} style={{ width: "100px", height: "100px" }} />
+          Precio: 30 Caramelos
+        </button>
+
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
+          <img className='img-fluid' src={torreImg} style={{ width: "100px", height: "100px" }} />
+          Precio: 50 Caramelos
+        </button>
+
       </div>
     </>
   )
