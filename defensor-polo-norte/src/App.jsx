@@ -11,7 +11,6 @@ import torreImg from "./assets/torre.png";
 
 export const initialState = {
   caramels: 20,
-  caramelosObtenidos:10,
   waveNumber: 1,
   damageDealt: 0,
   waveGoal: 100,
@@ -56,7 +55,8 @@ export default function App() {
     newState = {
       ...state,
       waveGoal: state.waveGoal * 1.1,
-      caramelosObtenidos: state.caramelosObtenidos * 1.1,
+      waveNumber: state.waveNumber + 1,
+      caramels: state.caramels + 10,
       damageDealt: state.damageDealt = 0,
     };
   }
@@ -85,12 +85,10 @@ export default function App() {
 
         <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
           <img className='img-fluid' src={multiplicadorImg} style={{ width: "100px", height: "100px" }} />
-          x  {state.clickMultiplier}
         </button>
 
         <button className='col-md-2 col-12' onClick={() => dispatch({ type: "NEXT_WAVE" })}>
-          🚚
-          x  {state.clickMultiplier}
+          🚚<p>Cambiar Oleada</p>
         </button>
         <p className='col-md-2 col-12'>{state.waveNumber} NUMERO DE OLEADA🍪</p>
         <p className='col-md-2 col-12'>{state.waveGoal} MARCADOR OLEADA🍪</p>
