@@ -42,8 +42,8 @@ export default function App() {
     newState = {
       ...state,
         damagePerShot: state.damagePerShot + 1 ,
-        damagePerShotPrice: state.damagePerShotPrice * 1.2,
-        caramels: state.caramels - state.damagePerShotPrice,
+        damagePerShotPrice: Math.round(state.damagePerShotPrice * 1.2),
+        caramels: state.caramels - Math.round(state.damagePerShotPrice),
     };
   }
   else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= state.multiplierPrice) {
@@ -93,12 +93,12 @@ export default function App() {
         <button className='col-md-2 col-12' onClick={() => dispatch({ type: "NEXT_WAVE" })}>
           🚚<p>Cambiar Oleada</p>
         </button>
-        <p className='col-md-2 col-12'>{state.waveNumber} NUMERO DE OLEADA🍪</p>
-        <p className='col-md-2 col-12'>{state.waveGoal} MARCADOR OLEADA🍪</p>
-        <p className='col-md-2 col-12'>{state.damageDealt}/{state.waveGoal} DAÑO TOTAL HECHO🍪</p>
-        <p className='col-md-2 col-12'>{state.damagePerShot} DAÑO POR CLICK🍪</p>
-        <p className='col-md-2 col-12'>{state.autoShotsPerSecond} DAÑO POR SEGUNDO 🍪</p>
-        <p className='col-md-2 col-12'>{state.damagePerShotPrice} PRECIO MULTIPLICADOR  🍪</p>
+        <p className='col-md-2 col-12'>{state.waveNumber} NUMERO DE OLEADA</p>
+        <p className='col-md-2 col-12'>{state.waveGoal} MARCADOR OLEADA</p>
+        <p className='col-md-2 col-12'>{state.damageDealt}/{state.waveGoal} DAÑO TOTAL HECHO</p>
+        <p className='col-md-2 col-12'>{state.damagePerShot} DAÑO POR CLICK</p>
+        <p className='col-md-2 col-12'>{state.autoShotsPerSecond} DAÑO POR SEGUNDO </p>
+        <p className='col-md-2 col-12'>{state.damagePerShotPrice} PRECIO MULTIPLICADOR  </p>
         
 
         <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_MULTIPLIER" })}>
