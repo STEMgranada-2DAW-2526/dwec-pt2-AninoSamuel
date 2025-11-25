@@ -49,7 +49,7 @@ export default function App() {
   else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= state.multiplierPrice) {
     newState = {
       ...state,
-    };
+    }; 
   }
   else if (action.type === "NEXT_WAVE" && state.damageDealt >= state.waveGoal) {
     newState = {
