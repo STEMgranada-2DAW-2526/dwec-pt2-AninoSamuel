@@ -5,6 +5,7 @@ export const initialState = {
   damageDealt: 0,
   waveGoal: 100,
   damagePerShot: 1,
+  damagePerShotPrice: 10,
   autoShotsPerSecond: 1 ,
   upgrades: [],
 };
@@ -19,17 +20,19 @@ export function cookieReducer(state, action) {
     };
   } 
 
-  else if (action.type === "AUTO_SHOOT" && state.cookies >= state.multiplierPrice) {
+  else if (action.type === "AUTO_SHOOT" && state.caramels >= state.multiplierPrice) {
     newState = {
       ...state,
     };
   }
-  else if (action.type === "BUY_MULTIPLIER" && state.cookies >= state.multiplierPrice) {
+  else if (action.type === "BUY_MULTIPLIER" && state.caramels >= state.damagePerShotPrice) {
     newState = {
       ...state,
+        damagePerShot: state.damagePerShot + 1 ,
+        damagePerShotPrice: state.damagePerShotPrice * 1.2,
     };
   }
-  else if (action.type === "BUY_DAMAGE_UPGRADE" && state.cookies >= state.multiplierPrice) {
+  else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= state.multiplierPrice) {
     newState = {
       ...state,
     };
@@ -38,8 +41,8 @@ export function cookieReducer(state, action) {
     newState = {
       ...state,
       waveGoal: state.waveGoal * 1.1,
-      caramelosObtenidos: state.cookies - state.multiplierPrice,
-      multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement),
+      caramelosObtenidos: state.caramelosObtenidos * 1.1,
+      damageDealt: state.damageDealt = 0,
     };
   }
 }
