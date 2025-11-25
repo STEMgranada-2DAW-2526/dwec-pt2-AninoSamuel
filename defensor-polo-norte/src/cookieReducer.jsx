@@ -1,8 +1,10 @@
 export const initialState = {
-  monedas: 20,
-
-  danio: 0,
-  oleadaVida: 100,
+  caramels: 20,
+  damageDealt: 0,
+  waveGoal: 100,
+  damagePerShot: 1,
+  autoShotsPerSecond: 1 ,
+  upgrades: [],
 
 
   clickMultiplier: 1,
@@ -31,4 +33,37 @@ export function cookieReducer(state, action) {
       danio: state.danio + state.clickMultiplier,
     };
   } 
+
+  else if (action.type === "AUTO_SHOOT" && state.cookies >= state.multiplierPrice) {
+    newState = {
+      ...state,
+      clickMultiplier: state.clickMultiplier + 1,
+      cookies: state.cookies - state.multiplierPrice,
+      multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement),
+    };
+  }
+  else if (action.type === "BUY_MULTIPLIER" && state.cookies >= state.multiplierPrice) {
+    newState = {
+      ...state,
+      clickMultiplier: state.clickMultiplier + 1,
+      cookies: state.cookies - state.multiplierPrice,
+      multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement),
+    };
+  }
+  else if (action.type === "BUY_DAMAGE_UPGRADE" && state.cookies >= state.multiplierPrice) {
+    newState = {
+      ...state,
+      clickMultiplier: state.clickMultiplier + 1,
+      cookies: state.cookies - state.multiplierPrice,
+      multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement),
+    };
+  }
+  else if (action.type === "NEXT_WAVE" && state.cookies >= state.multiplierPrice) {
+    newState = {
+      ...state,
+      clickMultiplier: state.clickMultiplier + 1,
+      cookies: state.cookies - state.multiplierPrice,
+      multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement),
+    };
+  }
 }
