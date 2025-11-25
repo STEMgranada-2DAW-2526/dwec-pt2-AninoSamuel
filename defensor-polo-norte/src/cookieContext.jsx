@@ -6,13 +6,13 @@ export const CookieContext = createContext();
 export function CookieProvider({ children }) {
   const [state, dispatch] = useReducer(cookieReducer, initialState);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      dispatch({ type: "GENERATE_COOKIES" });
-    }, 1000);
- 
-    return () => clearInterval(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //       dispatch({ type: "AUTO_SHOOT" });
+  //   }, 1000);
+
+  //   return () => clearInterval(timer);
+  // }, [state.caramels]);
 
   return (
     <CookieContext.Provider value={{ state, dispatch }}>

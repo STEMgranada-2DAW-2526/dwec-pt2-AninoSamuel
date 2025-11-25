@@ -23,7 +23,7 @@ export function cookieReducer(state, action) {
   else if (action.type === "AUTO_SHOOT" && state.caramels >= state.multiplierPrice) {
     newState = {
       ...state,
-      autoShotsPerSecond: state.damageDealt + state.autoShotsPerSecond * 0.1 + state.grandmaCount * 1,
+      autoShotsPerSecond: state.damageDealt + state.autoShotsPerSecond ,
     };
   }
   else if (action.type === "BUY_MULTIPLIER" && state.caramels >= state.damagePerShotPrice) {
