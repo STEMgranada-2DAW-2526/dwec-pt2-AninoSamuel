@@ -13,21 +13,12 @@ function App() {
 
   return (
     <>
-       <div className='container'>
-      <div className='row justify-content-center'>
-        <h1 className='col-12'>{Math.round(state.caramels)} 🍪</h1>
-
-        <button className='col-5' onClick={() => dispatch({ type: "CLICK_SHOOT" })}>
-          <img className='img-fluid' src={turronImg} style={{ width: "100px", height: "100px" }} />
-        </button>
-      </div>
 
       <div className='row justify-content-center'>
-        <p className='col-md-2 col-12'>{state.cursorPrice} 🍪</p>
-        <p className='col-md-2 col-12'>{state.multiplierPrice} 🍪</p>
-        <p className='col-md-2 col-12'>{state.grandmaPrice} 🍪</p>
+        <p className='col-md-2 col-12'>{state.caramels} 🍪</p>
+        <p className='col-md-2 col-12'>{state.waveNumber} 🍪</p>
+        <p className='col-md-2 col-12'>{state.waveGoal} 🍪</p>
       </div>
-    </div>
     </>
   )
 }
