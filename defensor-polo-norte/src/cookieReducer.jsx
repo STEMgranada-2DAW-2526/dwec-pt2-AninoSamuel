@@ -1,5 +1,9 @@
 export const initialState = {
-  cookies: 20,
+  monedas: 20,
+
+  danio: 0,
+  oleadaVida: 100,
+
 
   clickMultiplier: 1,
   multiplierPrice: 50,
@@ -21,10 +25,10 @@ export const initialState = {
 export function cookieReducer(state, action) {
     let newState = state;
 
-    if (action.type === "CLICK_COOKIE") {
+    if (action.type === "CLICK_SHOOT") {
     newState = {
       ...state,
-      cookies: state.cookies + state.clickMultiplier,
+      danio: state.danio + state.clickMultiplier,
     };
   } 
 }

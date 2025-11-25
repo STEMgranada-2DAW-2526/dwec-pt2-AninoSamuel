@@ -1,33 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useContext } from "react";
+import { CookieContext, CookieProvider } from "./cookieContext";
+
+import cookieImg from "./assets/arbol_laser.png";
+import cursorImg from "./assets/canion_turron.png";
+import grandmaImg from "./assets/caramelo_sangriento.png";
+import multiplierImg from "./assets/multiplicador.png";
+import cohetesImg from "./assets/reno_lanza_cohetes.png";
+import torreImg from "./assets/torre.png";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+       <div className='container'>
+      <div className='row justify-content-center'>
+        <h1 className='col-12'>{Math.round(state.cookies)} 🍪</h1>
+
+        <button className='col-5' onClick={() => dispatch({ type: "CLICK_COOKIE" })}>
+          <img className='img-fluid' src={cookieImg} style={{ width: "100px", height: "100px" }} />
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <div className='row justify-content-center'>
+        <button className='col-md-2 col-12' onClick={() => dispatch({ type: "BUY_CURSOR" })}>
+          <img className='img-fluid' src={cursorImg} style={{ width: "100px", height: "100px" }} />
+          x{state.cursorCount}
+        </button>
+      </div>
+
+      <div className='row justify-content-center'>
+        <p className='col-md-2 col-12'>{state.cursorPrice} 🍪</p>
+        <p className='col-md-2 col-12'>{state.multiplierPrice} 🍪</p>
+        <p className='col-md-2 col-12'>{state.grandmaPrice} 🍪</p>
+      </div>
+    </div>
     </>
   )
 }
