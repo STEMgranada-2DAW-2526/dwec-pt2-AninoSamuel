@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { CookieContext, CookieProvider } from "./cookieContext";
-import Game from "./Game.jsx"
+import { useEffect, useReducer } from 'react'
+import './App.css'
 
 import laserImg from "./assets/arbol_laser.png";
 import turronImg from "./assets/canion_turron.png";
@@ -10,10 +9,81 @@ import cohetesImg from "./assets/reno_lanza_cohetes.png";
 import torreImg from "./assets/torre.png";
 
 
+export const initialState = {
+  caramels: 20,
+  caramelosObtenidos:10,
+  waveNumber: 1,
+  damageDealt: 0,
+  waveGoal: 100,
+  damagePerShot: 1,
+  damagePerShotPrice: 10,
+  autoShotsPerSecond: 1 ,
+  upgrades: [],
+};
+
 export default function App() {
-  return (
-    <CookieProvider>
-      <Game/>
-    </CookieProvider>
-  );
+
+ function cookieReducer(state, action) {
+    let newState = state;
+
+    if (action.type === "CLICK_SHOOT") {
+    newState = {
+      ...state,
+      damageDealt: state.damageDealt + state.damagePerShot,
+    };
+  } 
+
+  else if (action.type === "AUTO_SHOOT" && state.caramels >= state.multiplierPrice) {
+    newState = {
+      ...state,
+      autoShotsPerSecond: state.damageDealt + state.autoShotsPerSecond ,
+    };
+  }
+  else if (action.type === "BUY_MULTIPLIER" && state.caramels >= state.damagePerShotPrice) {
+    newState = {
+      ...state,
+        damagePerShot: state.damagePerShot + 1 ,
+        damagePerShotPrice: state.damagePerShotPrice * 1.2,
+    };
+  }
+  else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= state.multiplierPrice) {
+    newState = {
+      ...state,
+    };
+  }
+  else if (action.type === "NEXT_WAVE" && state.damageDealt >= state.waveGoal) {
+    newState = {
+      ...state,
+      waveGoal: state.waveGoal * 1.1,
+      caramelosObtenidos: state.caramelosObtenidos * 1.1,
+      damageDealt: state.damageDealt = 0,
+    };
+  }
+}
+
+
+  const [state, dispatch] = useReducer(cookieReducer, initialState);
+
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //       dispatch({ type: "AUTO_SHOOT" });
+  //   }, 1000);
+
+  //   return () => clearInterval(timer);
+  // }, []);
+ return (
+    <>
+      <div className='row justify-content-center'>
+        <p className='col-md-2 col-12'>{state.caramels} 🍪</p>
+
+        <button className='col-5' onClick={() => dispatch({ type: "CLICK_SHOOT" })}>
+          <img className='img-fluid' src={turronImg} style={{ width: "100px", height: "100px" }} />
+        </button>
+        <p className='col-md-2 col-12'>{state.waveNumber} 🍪</p>
+        <p className='col-md-2 col-12'>{state.waveGoal} 🍪</p>
+        <p className='col-md-2 col-12'>{state.damageDealt} 🍪</p>
+      </div>
+    </>
+  )
+
 }
